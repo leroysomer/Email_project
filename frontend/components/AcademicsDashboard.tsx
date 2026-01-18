@@ -37,7 +37,7 @@ export default function AcademicsDashboard() {
   })
 
   if (loading) {
-    return <div className="text-center py-8">Loading academics...</div>
+    return <div className="text-center py-8 text-gray-900">Loading academics...</div>
   }
 
   if (error) {
@@ -47,13 +47,13 @@ export default function AcademicsDashboard() {
   return (
     <div className="bg-white shadow rounded-lg p-6">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-4">Academics Dashboard</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-900">Academics Dashboard</h2>
         <input
           type="text"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           placeholder="Search by name, university, or research interests..."
-          className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
 

@@ -46,6 +46,10 @@ export const profileApi = {
     const response = await apiClient.get('/api/profile')
     return response.data
   },
+  getProfile: async () => {
+    const response = await apiClient.get('/api/profile')
+    return response.data
+  },
 }
 
 // Search APIs
@@ -82,6 +86,26 @@ export const emailApi = {
   },
   updateStatus: async (campaignId: number, status: string) => {
     const response = await apiClient.patch(`/api/emails/campaigns/${campaignId}/status`, { status })
+    return response.data
+  },
+}
+
+// Campaign APIs
+export const campaignApi = {
+  addToList: async (academicId: number) => {
+    const response = await apiClient.post(`/api/campaigns/academics/${academicId}/select`)
+    return response.data
+  },
+  removeFromList: async (academicId: number) => {
+    const response = await apiClient.delete(`/api/campaigns/academics/${academicId}/select`)
+    return response.data
+  },
+  getSelectedAcademics: async () => {
+    const response = await apiClient.get('/api/campaigns/academics/selected')
+    return response.data
+  },
+  isSelected: async (academicId: number) => {
+    const response = await apiClient.get(`/api/campaigns/academics/${academicId}/is-selected`)
     return response.data
   },
 }

@@ -4,6 +4,7 @@
 
 Make sure you have the following installed:
 - Python 3.11+ (`python3 --version`)
+- uv (Python package manager)
 - Node.js 18+ (`node --version`)
 - npm (`npm --version`)
 - PostgreSQL (`psql --version`)
@@ -11,9 +12,12 @@ Make sure you have the following installed:
 If you need to install them:
 
 ```bash
-# Python 3 and pip
+# Python 3
 sudo apt update
-sudo apt install python3 python3-pip python3-venv
+sudo apt install python3
+
+# uv (Python package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Node.js 18+ (using NodeSource repository)
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -54,25 +58,13 @@ postgresql://email_user:your_password_here@localhost:5432/email_assistant
 cd backend
 ```
 
-2. Create a virtual environment:
+2. Install Python dependencies with uv (automatically creates virtual environment):
 
 ```bash
-python3 -m venv venv
+uv sync
 ```
 
-3. Activate the virtual environment:
-
-```bash
-source venv/bin/activate
-```
-
-4. Install Python dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-5. Create a `.env` file in the backend directory:
+3. Create a `.env` file in the backend directory:
 
 ```bash
 nano .env
@@ -95,16 +87,16 @@ SMTP_PASSWORD=your_smtp_password
 CORS_ORIGINS=["http://localhost:3000"]
 ```
 
-6. Create the uploads directory:
+4. Create the uploads directory:
 
 ```bash
 mkdir -p uploads
 ```
 
-7. Run the FastAPI server:
+5. Run the FastAPI server:
 
 ```bash
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 The API will be available at:
@@ -154,8 +146,7 @@ To run both services simultaneously, you have two options:
 **Terminal 1 - Backend:**
 ```bash
 cd backend
-source venv/bin/activate
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 **Terminal 2 - Frontend:**
@@ -169,8 +160,7 @@ npm run dev
 **Start Backend in Background:**
 ```bash
 cd backend
-source venv/bin/activate
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000 &
+uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000 &
 ```
 
 **Start Frontend:**
@@ -194,12 +184,10 @@ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE email_assistant TO em
 
 # 2. Backend
 cd backend
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+uv sync
 # Create .env file with your settings
 mkdir -p uploads
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 # 3. Frontend (in new terminal)
 cd frontend
@@ -235,19 +223,20 @@ sudo kill -9 <PID>
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8001
 ```
 
-### Python Virtual Environment Issues
+### Python Dependencies Issues
 
-If you have issues with venv:
+If you have issues with uv:
 ```bash
-# Make sure you're using Python 3
+# Make sure you're using Python 3.11+
 python3 --version
 
-# Remove and recreate venv
-rm -rf venv
-python3 -m venv venv
-source venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
+# Reinstall uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Clear uv cache and reinstall
+uv cache clean
+rm -rf .venv
+uv sync
 ```
 
 ### Node.js Issues

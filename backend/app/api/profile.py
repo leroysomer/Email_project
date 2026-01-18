@@ -17,8 +17,13 @@ os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
 @router.post("/upload")
 async def upload_profile(
     resume: Optional[UploadFile] = File(None),
+    first_name: Optional[str] = Form(None),
+    last_name: Optional[str] = Form(None),
+    school: Optional[str] = Form(None),
+    classes: Optional[str] = Form(None),
     interests: Optional[str] = Form(None),
     email_template: Optional[str] = Form(None),
+    email_subject: Optional[str] = Form(None),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -38,11 +43,25 @@ async def upload_profile(
             buffer.write(content)
         profile.resume_path = file_path
     
+    # Update personal information
+    if first_name is not None:
+        profile.first_name = first_name
+    if last_name is not None:
+        profile.last_name = last_name
+    if school is not None:
+        profile.school = school
+    if classes is not None:
+        profile.classes = classes
+    
+    # Update research interests
     if interests is not None:
         profile.interests_json = interests
     
+    # Update email configuration
     if email_template is not None:
         profile.email_template = email_template
+    if email_subject is not None:
+        profile.email_subject = email_subject
     
     db.commit()
     db.refresh(profile)

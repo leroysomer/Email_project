@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import auth, profile, search, emails, integrations
+from app.api import auth, profile, search, emails, integrations, campaigns
 from app.core.config import settings
 from app.core.database import engine, Base
 
@@ -21,6 +21,7 @@ app.include_router(profile.router, prefix="/api/profile", tags=["profile"])
 app.include_router(search.router, prefix="/api/search", tags=["search"])
 app.include_router(emails.router, prefix="/api/emails", tags=["emails"])
 app.include_router(integrations.router, prefix="/api/integrations", tags=["integrations"])
+app.include_router(campaigns.router, prefix="/api/campaigns", tags=["campaigns"])
 
 @app.on_event("startup")
 async def startup():

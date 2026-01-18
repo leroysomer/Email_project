@@ -71,7 +71,7 @@ GRANT ALL PRIVILEGES ON DATABASE email_assistant TO email_user;
 Make sure your `backend/.env` file has the correct DATABASE_URL:
 
 ```bash
-cd /mnt/c/Users/nicho/Documents/Email_project/backend
+cd ~/Documents/Email_project/backend
 nano .env
 ```
 
@@ -86,8 +86,8 @@ DATABASE_URL=postgresql://email_user:your_password_here@localhost:5432/email_ass
 ### 6. Test Database Connection
 
 ```bash
-# From your backend directory, with venv activated
-source venv/bin/activate
+# From your backend directory
+cd backend
 
 # Test connection with psql
 psql postgresql://email_user:your_password_here@localhost:5432/email_assistant
@@ -95,7 +95,7 @@ psql postgresql://email_user:your_password_here@localhost:5432/email_assistant
 # If it connects successfully, type \q to exit
 
 # Now try starting the server again
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ## One-Line Quick Fix (Replace 'your_password' with your actual password)

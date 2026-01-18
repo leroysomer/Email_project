@@ -32,7 +32,7 @@ export default function AcademicCard({ academic }: AcademicCardProps) {
 
   return (
     <div className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-      <h3 className="text-lg font-semibold mb-2">{academic.name}</h3>
+      <h3 className="text-lg font-semibold mb-2 text-gray-900">{academic.name}</h3>
 
       {academic.university_name && (
         <p className="text-sm text-gray-600 mb-2">{academic.university_name}</p>

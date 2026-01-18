@@ -47,7 +47,7 @@ export default function EmailStatusTracker() {
   }
 
   if (loading) {
-    return <div className="text-center py-4">Loading email statuses...</div>
+    return <div className="text-center py-4 text-gray-900">Loading email statuses...</div>
   }
 
   if (campaigns.length === 0) {
@@ -56,7 +56,7 @@ export default function EmailStatusTracker() {
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
-      <h2 className="text-2xl font-bold mb-4">Email Status Tracker</h2>
+      <h2 className="text-2xl font-bold mb-4 text-gray-900">Email Status Tracker</h2>
 
       {error && (
         <div className="mb-4 p-3 bg-red-100 text-red-700 rounded text-sm">{error}</div>

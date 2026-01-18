@@ -47,7 +47,7 @@ export default function UploadForm({ onComplete }: UploadFormProps) {
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
-      <h2 className="text-2xl font-bold mb-6">Setup Your Profile</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-900">Setup Your Profile</h2>
 
       {error && (
         <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>
@@ -83,7 +83,7 @@ export default function UploadForm({ onComplete }: UploadFormProps) {
             onChange={(e) => setInterests(e.target.value)}
             rows={4}
             placeholder="Describe your research interests, areas of study, and what you're looking for in an internship..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
@@ -97,7 +97,7 @@ export default function UploadForm({ onComplete }: UploadFormProps) {
             onChange={(e) => setEmailTemplate(e.target.value)}
             rows={8}
             placeholder="Write your base email template here. Placeholders like [NAME] and [RESEARCH_INTERESTS] will be replaced with the academic's information..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           />
           <p className="mt-1 text-sm text-gray-500">
             This template will be personalized for each academic using AI.

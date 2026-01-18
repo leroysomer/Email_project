@@ -40,8 +40,8 @@ export default function EmailPreview({
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div className="bg-white rounded-lg p-6 max-w-md">
-          <h3 className="text-xl font-bold mb-4">Email Sent!</h3>
-          <p className="mb-4">Your email has been sent to {academicName}.</p>
+          <h3 className="text-xl font-bold mb-4 text-gray-900">Email Sent!</h3>
+          <p className="mb-4 text-gray-900">Your email has been sent to {academicName}.</p>
           <button
             onClick={onClose}
             className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
@@ -57,7 +57,7 @@ export default function EmailPreview({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold">Email Preview</h3>
+          <h3 className="text-xl font-bold text-gray-900">Email Preview</h3>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             ✕
           </button>
@@ -73,7 +73,7 @@ export default function EmailPreview({
         </div>
 
         <div className="border border-gray-300 rounded-md p-4 mb-4 bg-gray-50">
-          <pre className="whitespace-pre-wrap text-sm">{generatedEmail}</pre>
+          <pre className="whitespace-pre-wrap text-sm text-gray-900">{generatedEmail}</pre>
         </div>
 
         {error && (

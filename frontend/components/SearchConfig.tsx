@@ -58,7 +58,7 @@ export default function SearchConfig({ onComplete }: SearchConfigProps) {
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
-      <h2 className="text-2xl font-bold mb-6">Search for Academics</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-900">Search for Academics</h2>
 
       {error && (
         <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>
@@ -76,7 +76,7 @@ export default function SearchConfig({ onComplete }: SearchConfigProps) {
                 value={university}
                 onChange={(e) => handleUniversityChange(index, e.target.value)}
                 placeholder="Enter university name"
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
               {universities.length > 1 && (
                 <button
@@ -108,7 +108,7 @@ export default function SearchConfig({ onComplete }: SearchConfigProps) {
             value={researchDomain}
             onChange={(e) => setResearchDomain(e.target.value)}
             placeholder="e.g., Machine Learning, Quantum Computing, Neuroscience"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
