@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react'
 import AuthForm from '@/components/AuthForm'
 import ProfileTab from '@/components/tabs/ProfileTab'
 import MailTab from '@/components/tabs/MailTab'
+import MailSetupTab from '@/components/tabs/MailSetupTab'
 import ResearchParametersTab from '@/components/tabs/ResearchParametersTab'
-import SearchResultsTab from '@/components/tabs/SearchResultsTab'
 import CampaignsTab from '@/components/tabs/CampaignsTab'
 import FollowingDashboardTab from '@/components/tabs/FollowingDashboardTab'
 import { isAuthenticated } from '@/lib/auth'
 
-type TabType = 'profile' | 'mail' | 'parameters' | 'results' | 'campaigns' | 'following'
+type TabType = 'profile' | 'mail' | 'mailsetup' | 'parameters' | 'campaigns' | 'following'
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -27,7 +27,7 @@ export default function Home() {
   }
 
   const handleSearchComplete = () => {
-    setActiveTab('results')
+    setActiveTab('campaigns')
   }
 
   if (!isLoggedIn) {
@@ -43,10 +43,10 @@ export default function Home() {
 
   const tabs = [
     { id: 'profile' as TabType, label: 'My Profile', icon: '👤' },
-    { id: 'mail' as TabType, label: 'My Mail', icon: '✉️' },
+    { id: 'mail' as TabType, label: 'Mail Template', icon: '✉️' },
+    { id: 'mailsetup' as TabType, label: 'Mail Setup', icon: '⚙️' },
     { id: 'parameters' as TabType, label: 'Research Parameters', icon: '🔍' },
-    { id: 'results' as TabType, label: 'Search Results', icon: '🔎' },
-    { id: 'campaigns' as TabType, label: 'My Campaign List', icon: '📊' },
+    { id: 'campaigns' as TabType, label: 'Research Campaigns', icon: '📊' },
     { id: 'following' as TabType, label: 'Following Dashboard', icon: '📈' },
   ]
 
@@ -103,8 +103,8 @@ export default function Home() {
         <div className="px-4 py-6">
           {activeTab === 'profile' && <ProfileTab />}
           {activeTab === 'mail' && <MailTab />}
+          {activeTab === 'mailsetup' && <MailSetupTab />}
           {activeTab === 'parameters' && <ResearchParametersTab onSearchComplete={handleSearchComplete} />}
-          {activeTab === 'results' && <SearchResultsTab />}
           {activeTab === 'campaigns' && <CampaignsTab />}
           {activeTab === 'following' && <FollowingDashboardTab />}
         </div>

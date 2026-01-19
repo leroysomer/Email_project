@@ -1,12 +1,16 @@
 export interface Academic {
   id: number
   name: string
+  title: string | null
   email: string | null
   university_id: number | null
   university_name: string | null
   research_interests: string | null
+  theme: string | null
+  description: string | null
   bio: string | null
   profile_url: string | null
+  website: string | null
 }
 
 export interface EmailCampaign {

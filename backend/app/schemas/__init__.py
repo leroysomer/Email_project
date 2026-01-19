@@ -1,11 +1,17 @@
-from app.schemas.auth import Token, UserCreate, UserLogin
-from app.schemas.profile import ProfileCreate, ProfileResponse
 from app.schemas.academic import AcademicResponse, AcademicSearch
-from app.schemas.email import EmailGenerate, EmailSend, EmailCampaignResponse
+from app.schemas.auth import Token, UserCreate, UserLogin
+from app.schemas.email import EmailCampaignResponse, EmailGenerate, EmailSend
+from app.schemas.profile import ProfileCreate, ProfileResponse
 
 __all__ = [
-    "Token", "UserCreate", "UserLogin",
-    "ProfileCreate", "ProfileResponse",
-    "AcademicResponse", "AcademicSearch",
-    "EmailGenerate", "EmailSend", "EmailCampaignResponse"
+    "AcademicResponse",
+    "AcademicSearch",
+    "EmailCampaignResponse",
+    "EmailGenerate",
+    "EmailSend",
+    "ProfileCreate",
+    "ProfileResponse",
+    "Token",
+    "UserCreate",
+    "UserLogin"
 ]

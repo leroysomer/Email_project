@@ -83,6 +83,9 @@ ignore = [
     "S101",    # Use of assert detected (useful in tests)
     "PLR0913", # Too many arguments to function call
     "TRY003",  # Avoid specifying long messages outside exception class
+    "T201",
+    "EM102",
+    "EM101",
 ]
 
 [tool.ruff.lint.per-file-ignores]

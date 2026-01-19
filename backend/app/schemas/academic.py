@@ -1,19 +1,36 @@
+
 from pydantic import BaseModel
-from typing import Optional, List
+
 
 class AcademicSearch(BaseModel):
-    universities: List[str]
+    universities: list[str]
     research_domain: str
+
+class AcademicCreate(BaseModel):
+    name: str
+    title: str | None = None
+    email: str | None = None
+    university_name: str | None = None
+    research_interests: str | None = None
+    theme: str | None = None
+    description: str | None = None
+    bio: str | None = None
+    profile_url: str | None = None
+    website: str | None = None
 
 class AcademicResponse(BaseModel):
     id: int
     name: str
-    email: Optional[str] = None
-    university_id: Optional[int] = None
-    university_name: Optional[str] = None
-    research_interests: Optional[str] = None
-    bio: Optional[str] = None
-    profile_url: Optional[str] = None
-    
+    title: str | None = None
+    email: str | None = None
+    university_id: int | None = None
+    university_name: str | None = None
+    research_interests: str | None = None
+    theme: str | None = None
+    description: str | None = None
+    bio: str | None = None
+    profile_url: str | None = None
+    website: str | None = None
+
     class Config:
         from_attributes = True

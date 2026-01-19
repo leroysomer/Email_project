@@ -1,6 +1,7 @@
+
 from openai import OpenAI
+
 from app.core.config import settings
-from typing import Dict
 
 client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
@@ -14,7 +15,7 @@ def generate_personalized_email(
     """
     Generate a personalized email using OpenAI GPT-4.
     """
-    
+
     prompt = f"""You are helping a student write a personalized email to an academic researcher for an internship opportunity.
 
 Student's email template:
@@ -47,11 +48,11 @@ Generate only the email body, starting with a greeting and ending with a closing
             temperature=0.7,
             max_tokens=1000
         )
-        
+
         generated_email = response.choices[0].message.content
         return generated_email
-    
-    except Exception as e:
+
+    except Exception:
         # Fallback to a simple template if API fails
         return f"""Dear Dr. {academic_name},
 

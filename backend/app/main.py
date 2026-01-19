@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import auth, profile, search, emails, integrations, campaigns
+
+from app.api import auth, campaigns, emails, integrations, profile, search
 from app.core.config import settings
-from app.core.database import engine, Base
+from app.core.database import Base, engine
 
 app = FastAPI(title="Academic Email Assistant API", version="1.0.0")
 

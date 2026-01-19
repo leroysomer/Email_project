@@ -1,6 +1,8 @@
+
 from pydantic import BaseModel
-from typing import Optional
+
 from app.models.email_campaign import EmailStatus
+
 
 class EmailGenerate(BaseModel):
     academic_id: int
@@ -15,9 +17,9 @@ class EmailCampaignResponse(BaseModel):
     academic_id: int
     academic_name: str
     status: EmailStatus
-    generated_email: Optional[str] = None
+    generated_email: str | None = None
     created_at: str
-    sent_at: Optional[str] = None
-    
+    sent_at: str | None = None
+
     class Config:
         from_attributes = True

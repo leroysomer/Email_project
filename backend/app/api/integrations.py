@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+
 from app.core.security import get_current_user
 from app.models.user import User
 
@@ -21,7 +22,7 @@ def connect_email_service(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Invalid service. Use 'gmail' or 'outlook'"
         )
-    
+
     # Placeholder: Return OAuth URL
     # In production, generate proper OAuth URLs based on service
     return {

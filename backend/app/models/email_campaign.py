@@ -1,8 +1,12 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Enum as SQLEnum
+import enum
+
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Enum as SQLEnum
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-import enum
+
 from app.core.database import Base
+
 
 class EmailStatus(str, enum.Enum):
     DRAFT = "draft"
@@ -12,7 +16,7 @@ class EmailStatus(str, enum.Enum):
 
 class EmailCampaign(Base):
     __tablename__ = "email_campaigns"
-    
+
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     academic_id = Column(Integer, ForeignKey("academics.id"), nullable=False)
@@ -21,7 +25,7 @@ class EmailCampaign(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     sent_at = Column(DateTime(timezone=True), nullable=True)
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-    
+
     # Relationships
     user = relationship("User", back_populates="email_campaigns")
     academic = relationship("Academic", back_populates="email_campaigns")

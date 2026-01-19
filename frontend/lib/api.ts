@@ -65,6 +65,18 @@ export const searchApi = {
     const response = await apiClient.get('/api/search/academics')
     return response.data
   },
+  getAcademic: async (academicId: number) => {
+    const response = await apiClient.get(`/api/search/academics/${academicId}`)
+    return response.data
+  },
+  addAcademicManually: async (data: any) => {
+    const response = await apiClient.post('/api/search/academics/manual', data)
+    return response.data
+  },
+  updateAcademic: async (academicId: number, data: any) => {
+    const response = await apiClient.patch(`/api/search/academics/${academicId}`, data)
+    return response.data
+  },
 }
 
 // Email APIs
@@ -80,6 +92,14 @@ export const emailApi = {
     })
     return response.data
   },
+  sendToAcademic: async (academicId: number, subject: string, body: string) => {
+    const response = await apiClient.post('/api/emails/send-to-academic', {
+      academic_id: academicId,
+      subject,
+      body,
+    })
+    return response.data
+  },
   getCampaigns: async () => {
     const response = await apiClient.get('/api/emails/campaigns')
     return response.data
@@ -88,24 +108,36 @@ export const emailApi = {
     const response = await apiClient.patch(`/api/emails/campaigns/${campaignId}/status`, { status })
     return response.data
   },
+  isConfigured: async () => {
+    const response = await apiClient.get('/api/emails/is-configured')
+    return response.data
+  },
 }
 
 // Campaign APIs
 export const campaignApi = {
-  addToList: async (academicId: number) => {
-    const response = await apiClient.post(`/api/campaigns/academics/${academicId}/select`)
+  getCampaigns: async () => {
+    const response = await apiClient.get('/api/campaigns')
     return response.data
   },
-  removeFromList: async (academicId: number) => {
-    const response = await apiClient.delete(`/api/campaigns/academics/${academicId}/select`)
+  getCampaignAcademics: async (campaignId: number) => {
+    const response = await apiClient.get(`/api/campaigns/${campaignId}/academics`)
     return response.data
   },
-  getSelectedAcademics: async () => {
-    const response = await apiClient.get('/api/campaigns/academics/selected')
+  addToTargets: async (academicId: number) => {
+    const response = await apiClient.post(`/api/campaigns/academics/${academicId}/add-to-targets`)
     return response.data
   },
-  isSelected: async (academicId: number) => {
-    const response = await apiClient.get(`/api/campaigns/academics/${academicId}/is-selected`)
+  removeFromTargets: async (academicId: number) => {
+    const response = await apiClient.delete(`/api/campaigns/academics/${academicId}/remove-from-targets`)
+    return response.data
+  },
+  isTargeted: async (academicId: number) => {
+    const response = await apiClient.get(`/api/campaigns/academics/${academicId}/is-targeted`)
+    return response.data
+  },
+  getTargets: async () => {
+    const response = await apiClient.get('/api/campaigns/targets')
     return response.data
   },
 }
