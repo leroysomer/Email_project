@@ -1,16 +1,17 @@
 
+import json
+from datetime import datetime
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from datetime import datetime
-import json
 
 from app.core.database import get_db
 from app.core.security import get_current_user
 from app.models.academic import Academic
+from app.models.campaign import Campaign, CampaignAcademic
 from app.models.university import University
 from app.models.user import User
-from app.models.campaign import Campaign, CampaignAcademic
-from app.schemas.academic import AcademicResponse, AcademicSearch, AcademicCreate
+from app.schemas.academic import AcademicCreate, AcademicResponse, AcademicSearch
 from app.services.academic_search import search_google_scholar
 
 router = APIRouter()
@@ -36,9 +37,9 @@ def search_academics(
     db.add(campaign)
     db.commit()
     db.refresh(campaign)
-    
+
     all_academics = []
-    
+
     for university_name in search_params.universities:
         # Get or create university
         university = db.query(University).filter(
@@ -75,7 +76,7 @@ def search_academics(
                 db.refresh(academic)
             else:
                 academic = existing
-            
+
             # Link academic to campaign
             campaign_academic = CampaignAcademic(
                 campaign_id=campaign.id,
@@ -83,9 +84,9 @@ def search_academics(
             )
             db.add(campaign_academic)
             all_academics.append(academic)
-    
+
     db.commit()
-    
+
     # Return campaign info
     return {
         "campaign_id": campaign.id,
@@ -137,13 +138,13 @@ def add_academic_manually(
         university = db.query(University).filter(
             University.name.ilike(f"%{academic_data.university_name}%")
         ).first()
-        
+
         if not university:
             university = University(name=academic_data.university_name)
             db.add(university)
             db.commit()
             db.refresh(university)
-    
+
     # Create academic
     academic = Academic(
         name=academic_data.name,
@@ -160,7 +161,7 @@ def add_academic_manually(
     db.add(academic)
     db.commit()
     db.refresh(academic)
-    
+
     return AcademicResponse(
         id=academic.id,
         name=academic.name,
@@ -184,13 +185,13 @@ def get_academic(
 ):
     """Get detailed information about a specific academic"""
     academic = db.query(Academic).filter(Academic.id == academic_id).first()
-    
+
     if not academic:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Academic not found"
         )
-    
+
     return AcademicResponse(
         id=academic.id,
         name=academic.name,
@@ -215,30 +216,30 @@ def update_academic(
 ):
     """Update an academic's information"""
     academic = db.query(Academic).filter(Academic.id == academic_id).first()
-    
+
     if not academic:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Academic not found"
         )
-    
+
     # Update fields
-    if 'title' in update_data:
-        academic.title = update_data['title']
-    if 'email' in update_data:
-        academic.email = update_data['email']
-    if 'theme' in update_data:
-        academic.theme = update_data['theme']
-    if 'research_interests' in update_data:
-        academic.research_interests = update_data['research_interests']
-    if 'description' in update_data:
-        academic.description = update_data['description']
-    if 'website' in update_data:
-        academic.website = update_data['website']
-    
+    if "title" in update_data:
+        academic.title = update_data["title"]
+    if "email" in update_data:
+        academic.email = update_data["email"]
+    if "theme" in update_data:
+        academic.theme = update_data["theme"]
+    if "research_interests" in update_data:
+        academic.research_interests = update_data["research_interests"]
+    if "description" in update_data:
+        academic.description = update_data["description"]
+    if "website" in update_data:
+        academic.website = update_data["website"]
+
     db.commit()
     db.refresh(academic)
-    
+
     return AcademicResponse(
         id=academic.id,
         name=academic.name,

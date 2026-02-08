@@ -70,7 +70,7 @@ async def upload_profile(
         profile.email_template = email_template
     if email_subject is not None:
         profile.email_subject = email_subject
-    
+
     # Email service configuration
     if email_service is not None:
         profile.email_service = email_service
@@ -87,10 +87,10 @@ async def upload_profile(
     if email_password is not None:
         # TODO: Encrypt password before storing
         profile.email_password = email_password
-    
+
     db.commit()
     db.refresh(profile)
-    
+
     return {"message": "Profile updated successfully"}
 
 @router.get("", response_model=ProfileResponse)

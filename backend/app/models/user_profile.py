@@ -23,7 +23,7 @@ class UserProfile(Base):
     # Email Configuration
     email_template = Column(Text, nullable=True)
     email_subject = Column(String, nullable=True)
-    
+
     # Email Service Configuration
     email_service = Column(String, nullable=True)  # 'gmail', 'academic', or null
     academic_email = Column(String, nullable=True)
